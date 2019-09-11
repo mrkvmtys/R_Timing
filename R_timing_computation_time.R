@@ -16,7 +16,7 @@ benchmark <- function(..., n = 100) {
 }
 
 
-# timing my slow join
+# timing my slow join (3 seconds on average)
 time(merge(x = final, y = mapping[, c("SepaCreditorName","SepaCreditorIBAN", "trCategory")], by = c("SepaCreditorName","SepaCreditorIBAN"), all.x = TRUE)
 )
 
@@ -30,7 +30,7 @@ setkey(final, SepaCreditorIBAN, SepaCreditorName)
 final <- as.data.table(final)
 key(final)
 
-# get benchmarked times
+# get benchmarked times - 0.2 seconds on average after indexes
 benchmark({
   time(final2 <- merge(x = final, y = mapping[, c("SepaCreditorName","SepaCreditorIBAN", "trCategory")], by = c("SepaCreditorName","SepaCreditorIBAN"), all.x = TRUE)
   )
